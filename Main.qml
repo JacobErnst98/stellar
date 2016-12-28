@@ -27,7 +27,7 @@ import QtQuick 2.3
 import QtQuick.Layouts 1.2
 import QtQuick.Controls.Styles 1.4
 import SddmComponents 2.0
-
+import QtQuick.Window 2.2
 Rectangle {
     LayoutMirroring.enabled: Qt.locale().textDirection == Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
@@ -48,18 +48,12 @@ Rectangle {
         }
     }
 
-    Background {
-        anchors.fill: parent
-        source: config.background
-        fillMode: Image.PreserveAspectCrop
-        onStatusChanged: {
-            if (status == Image.Error && source != config.defaultBackground) {
-                source = config.defaultBackground
-            }
-        }
-	
+    AnimatedImage {
+	anchors.fill: parent
+	fillMode: Image.PreserveAspectCrop
+        id: animation
+	source: config.background 
     }
-
     Rectangle {
         anchors.fill: parent
         color: "transparent"
@@ -70,7 +64,7 @@ Rectangle {
 	    anchors.top: parent.top
 	    anchors.topMargin: 5
 	    z: 100
-	    width: 350
+	    width: 410
 
             opacity: 0.7
 	    gradient: Gradient {
@@ -85,8 +79,10 @@ Rectangle {
                 spacing: 4
 
                 ComboBox {
+		    opacity: 0.3
                     id: session
                     font.pixelSize: 14
+		    width: 150
 
                     //arrowIcon: "angle-down.png"
 
@@ -97,6 +93,7 @@ Rectangle {
                 }
 
 		LayoutBox {
+		    opacity: 0.3
                     id: layoutBox
                     font.pixelSize: 14
 
@@ -106,6 +103,7 @@ Rectangle {
                 }
                 
                 Button {
+		    opacity: 0.3
                     id: shutdownButton
                     text: textConstants.shutdown
 		    
@@ -115,6 +113,7 @@ Rectangle {
                 }
 
                 Button {
+		    opacity: 0.3
                     id: rebootButton
                     text: textConstants.reboot
 
